@@ -1,6 +1,7 @@
 package com.example.beacon;
 
-import android.annotation.SuppressLint;
+
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         distress = findViewById(R.id.distressButton);
         distress.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("StaticFieldLeak")
+
             @Override
             public void onClick(View arg0) {
                 final View arg = arg0;
@@ -45,37 +46,39 @@ public class MainActivity extends AppCompatActivity {
                 StrictMode.setVmPolicy(builder.build());
 
 
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            Intent callIntent = new Intent(Intent.ACTION_CALL);
-                            callIntent.setData(Uri.parse("tel:" + "1-650-695-2483"));
-                            startActivity(callIntent);
-                        } catch (SecurityException err) {
-                            System.out.println(err);
-                        }
-                    }
+//                AsyncTask.execute(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        try {
+//                            Intent callIntent = new Intent(Intent.ACTION_CALL);
+//                            callIntent.setData(Uri.parse("tel:" + "1-650-695-2483"));
+//                            startActivity(callIntent);
+//                        } catch (SecurityException err) {
+//                            System.out.println(err);
+//                        }
+//                    }
+//
+//                });
+//
+//                AsyncTask.execute(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        SmsManager smsManager = SmsManager.getDefault();
+//                        smsManager.sendTextMessage("smsto:1-650-695-2483", null, "I'm in deep trouble. Call the police", null, null);
+//                    }
+//
+//                });
+//
+//
+//                AsyncTask.execute(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        record_video(arg);
+//                    }
+//                });
 
-                });
 
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        SmsManager smsManager = SmsManager.getDefault();
-                        smsManager.sendTextMessage("smsto:1-650-695-2483", null, "I'm in deep trouble. Call the police", null, null);
-                    }
-
-                });
-
-
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        record_video(arg);
-                    }
-                });
-
+                new LongOperation().execute("");
 
             }
         });
@@ -106,4 +109,37 @@ public class MainActivity extends AppCompatActivity {
         File video_file = new File(folder, "video.mp4");
         return video_file;
     }
+
+
+    private class LongOperation extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+
+                callIntent.setData(Uri.parse("tel:" + "1-650-695-2483"));
+                startActivity(callIntent);
+            } catch (SecurityException err) {
+                System.out.println(err);
+            }
+
+            return null;
+        }
+
+
+        protected void onPostExecute(Void... values) {
+        }
+
+        @Override
+        protected void onPreExecute() {}
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
+    }
 }
+
+
+
+
+
