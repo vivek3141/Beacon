@@ -16,33 +16,13 @@
         android:layout_marginEnd="65dp"
         android:layout_marginBottom="258dp"
         android:background="@drawable/gradient_button"
-        android:text="DISTRESS"
+        android:text="END DISTRESS"
         android:textColor="#CDCDCD"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
-
-
-    <Button
-        android:id="@+id/contactsButton"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="140dp"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="104dp"
-        android:background="@android:color/transparent"
-        android:text="@string/chooseCont"
-        android:textColor="#CDCDCD"
-        android:textSize="17sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
 
     <SurfaceView
         android:id="@+id/surfaceView1"

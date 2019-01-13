@@ -63,16 +63,17 @@ public class message extends Service {
             Toast.makeText(getBaseContext(), "Recording Started", Toast.LENGTH_SHORT).show();
 
             mServiceCamera = Camera.open();
+            mServiceCamera.setDisplayOrientation(90);
             Camera.Parameters params = mServiceCamera.getParameters();
             mServiceCamera.setParameters(params);
             Camera.Parameters p = mServiceCamera.getParameters();
 
             final List<Size> listPreviewSize = p.getSupportedPreviewSizes();
-            for (Size size : listPreviewSize) {
+            /*for (Size size : listPreviewSize) {
                 Log.i(TAG, String.format("Supported Preview Size (%d, %d)", size.width, size.height));
-            }
+            }*/
 
-            Size previewSize = listPreviewSize.get(0);
+            Size previewSize = listPreviewSize.get(listPreviewSize.size() - 2);
             p.setPreviewSize(previewSize.width, previewSize.height);
             mServiceCamera.setParameters(p);
 

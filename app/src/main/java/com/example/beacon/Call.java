@@ -69,57 +69,11 @@ public class Call extends AppCompatActivity implements SurfaceHolder.Callback{
 
             @Override
             public void onClick(View arg0) {
-                final View arg = arg0;
-
-
                 Intent intent2 = new Intent(Call.this, message.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startService(intent2);
-                moveTaskToBack(true);
-
-
-
-//                AsyncTask.execute(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//                        try {
-//                            Intent callIntent = new Intent(Intent.ACTION_CALL);
-//
-//                            callIntent.setData(Uri.parse("tel:" + "1-650-695-2483"));
-//                            startActivity(callIntent);
-//                            //moveTaskToBack(true);
-//                        } catch (SecurityException err) {
-//                            System.out.println(err);
-//                        }
-//                    }
-//
-//                });
-
-
-
-//                AsyncTask.execute(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        SmsManager smsManager = SmsManager.getDefault();
-//                        smsManager.sendTextMessage("smsto:1-650-695-2483", null, "I'm in deep trouble. Call the police", null, null);
-//                    }
-//
-//                });
-
-
-//                AsyncTask.execute(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        record_video(arg);
-//                    }
-//                });
-
                 record_video(arg0);
-
-
-                //new LongOperation().execute("");
-
+                moveTaskToBack(true);
             }
         });
 
