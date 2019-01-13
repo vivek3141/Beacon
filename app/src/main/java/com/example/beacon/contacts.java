@@ -1,6 +1,5 @@
 package com.example.beacon;
 
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -25,7 +24,6 @@ public class contacts extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
         SearchView searchView = (SearchView) findViewById(R.id.search);
-        EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         final ListView listView = (ListView) findViewById(R.id.listview);
         final ArrayList<String> contactList = new ArrayList<>();
 
@@ -63,7 +61,7 @@ public class contacts extends AppCompatActivity {
         });
     }
     protected void setContacts(String[] list, ListView listView){
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.lv_item, R.id.textView, list);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.lv_item, R.id.textView, list);
         listView.setAdapter(arrayAdapter);
     }
 }
