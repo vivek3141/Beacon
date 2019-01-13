@@ -49,6 +49,22 @@ public class Call extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.i("", file);
+        String[] read = file.split("\n");
+        try {
+            Intent callIntent = new Intent(Intent.ACTION_CALL);
+
+            callIntent.setData(Uri.parse("tel:" + read[0].split(":")[1]));
+            startActivity(callIntent);
+        } catch (SecurityException err) {
+            System.out.println(err);
+        }
+
+        SmsManager smsManager = SmsManager.getDefault();
+        for (int i = 0; i < read.length; i++) {
+            smsManager.sendTextMessage("smsto:" + read[i].split(":")[1], null, "I'm in deep trouble. Call the police", null, null);
+        }
+        Intent intent = new Intent(Call.this, MainActivity.class);
+        startActivity(intent);
 /*
         contacts = findViewById(R.id.contactsButton);
         contacts.setOnClickListener(new View.OnClickListener() {
