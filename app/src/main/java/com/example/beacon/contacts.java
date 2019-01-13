@@ -51,7 +51,6 @@ public class contacts extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.i("","IN THE FUNC");
-                SparseBooleanArray checked = listView.getCheckedItemPositions();
                 ListAdapter adapter = listView.getAdapter();
                 CheckBox cb;
                 for (int i = 0; i < listView.getAdapter().getCount(); i++) {
