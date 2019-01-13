@@ -19,13 +19,14 @@ import android.content.ContentResolver;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import android.content.Intent;
 
 
-public class contacts extends AppCompatActivity {
+public class Contacts extends AppCompatActivity {
 
-
+    public CustomAdapter arrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +51,15 @@ public class contacts extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.i("","IN THE FUNC");
-                ListAdapter adapter = listView.getAdapter();
                 CheckBox cb;
+                View list_v;
                 for (int i = 0; i < listView.getAdapter().getCount(); i++) {
-                    cb = (CheckBox)listView.getChildAt(i).findViewById(R.id.icon);
-                    if (cb.isChecked()) {
-                        Log.i("", adapter.getItem(i).toString());
+                    list_v = listView.getChildAt(i);
+                    if (list_v != null) {
+                        cb = list_v.findViewById(R.id.icon);
+                        if (cb.isChecked()) {
+                            Log.i("", arrayAdapter.getItem(i));
+                        }
                     }
                 }
             }
@@ -84,7 +87,8 @@ public class contacts extends AppCompatActivity {
     }
 
     protected void setContacts(String[] list, ListView listView) {
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, R.layout.lv_item, R.id.textView, list);
+
+        arrayAdapter = new CustomAdapter(getApplicationContext(), list, new int[list.length]);
         listView.setAdapter(arrayAdapter);
     }
 }

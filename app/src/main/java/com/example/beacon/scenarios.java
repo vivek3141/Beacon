@@ -27,14 +27,14 @@ public class scenarios extends AppCompatActivity {
         bullyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent int1 = new Intent(scenarios.this, contacts.class);
+                Intent int1 = new Intent(scenarios.this, Contacts.class);
                 startActivity(int1);
             }
         });
         kidnapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent int2 = new Intent(scenarios.this, contacts.class);
+                Intent int2 = new Intent(scenarios.this, Contacts.class);
                 startActivity(int2);
 
             }
@@ -42,14 +42,14 @@ public class scenarios extends AppCompatActivity {
         abuseButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent int2 = new Intent(scenarios.this, contacts.class);
+                Intent int2 = new Intent(scenarios.this, Contacts.class);
                 startActivity(int2);
             }
         }));
         shootingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent int3 = new Intent(scenarios.this, contacts.class);
+                Intent int3 = new Intent(scenarios.this, Contacts.class);
                 startActivity(int3);
             }
         });
