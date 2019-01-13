@@ -26,7 +26,7 @@ public class contacts extends AppCompatActivity {
         setContentView(R.layout.activity_contacts);
         SearchView searchView = (SearchView) findViewById(R.id.search);
         EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
-        ListView listView = (ListView) findViewById(R.id.listview);
+        final ListView listView = (ListView) findViewById(R.id.listview);
         final ArrayList<String> contactList = new ArrayList<>();
 
         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
@@ -41,8 +41,7 @@ public class contacts extends AppCompatActivity {
 
         Collections.sort(contactList);
         String list[] = contactList.toArray(new String[contactList.size()]);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.lv_item, R.id.textView, list);
-        listView.setAdapter(arrayAdapter);
+        setContacts(list, listView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -53,14 +52,18 @@ public class contacts extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 ArrayList<String> search = new ArrayList<>();
                 for(String i: contactList){
-                    if(i.substring(0,newText.length()).equals(newText)){
+                    if(i.substring(0,newText.length()).toUpperCase().equals(newText.toUpperCase())){
                         search.add(i);
                     }
                 }
                 String[] list = search.toArray(new String[search.size()]);
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.lv_item, R.id.textView, list);
+                setContacts(list, listView);
                 return false;
             }
         });
+    }
+    protected void setContacts(String[] list, ListView listView){
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.lv_item, R.id.textView, list);
+        listView.setAdapter(arrayAdapter);
     }
 }
