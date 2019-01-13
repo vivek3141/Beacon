@@ -9,16 +9,16 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import java.util.ArrayList;
 import java.util.zip.Inflater;
 
 public class CustomAdapter extends BaseAdapter {
     Context context;
     String countryList[];
-    int flags[];
+    private ArrayList<Integer> flags = new ArrayList<Integer>();
     LayoutInflater inflter;
 
-    public CustomAdapter(Context applicationContext, String[] countryList, int[] flags) {
+    public CustomAdapter(Context applicationContext, String[] countryList, ArrayList<Integer> flags) {
         this.context = context;
         this.countryList = countryList;
         this.flags = flags;
@@ -47,7 +47,8 @@ public class CustomAdapter extends BaseAdapter {
         CheckBox icon = (CheckBox) view.findViewById(R.id.icon);
         country.setText(countryList[i]);
         boolean c = true;
-        if (flags[i] == 0) {
+        Integer n = flags.get(i);
+        if (n == 0) {
             c = false;
         }
         icon.setChecked(c);

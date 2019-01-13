@@ -1,7 +1,5 @@
 package com.example.beacon;
 
-
-
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
@@ -132,15 +130,13 @@ public class MainActivity extends AppCompatActivity {
         File video_file = new File(folder, "video.mp4");
         return video_file;
     }
-    public class PhoneService extends Service {
+    public static class PhoneService extends Service {
         public PhoneService(){}
         @Override
         public IBinder onBind(Intent intent) {
             return null;
         }
 
-
-        public void onCreate(){}
 
         public void onStartCommand() {
             AsyncTask.execute(new Runnable() {

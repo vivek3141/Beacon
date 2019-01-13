@@ -27,6 +27,7 @@ import android.content.Intent;
 public class Contacts extends AppCompatActivity {
 
     public CustomAdapter arrayAdapter;
+    public ArrayList<Integer> flags = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +45,12 @@ public class Contacts extends AppCompatActivity {
 
         }
         phones.close();
-
+        for(int counter = 0; counter < contactList.size(); counter++){
+            flags.add(0);
+        }
         Collections.sort(contactList);
         final String list[] = contactList.toArray(new String[contactList.size()]);
-        setContacts(list, listView);
+        setContacts(list, listView, flags);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,16 +82,16 @@ public class Contacts extends AppCompatActivity {
                     }
                 }
                 String[] list = search.toArray(new String[search.size()]);
-                setContacts(list, listView);
+                setContacts(list, listView, flags);
                 return false;
             }
         });
 
     }
 
-    protected void setContacts(String[] list, ListView listView) {
+    protected void setContacts(String[] list, ListView listView, ArrayList<Integer> flags) {
 
-        arrayAdapter = new CustomAdapter(getApplicationContext(), list, new int[list.length]);
+        arrayAdapter = new CustomAdapter(getApplicationContext(), list, flags);
         listView.setAdapter(arrayAdapter);
     }
 }
