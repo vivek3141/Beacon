@@ -27,7 +27,7 @@ public class contacts extends AppCompatActivity {
         SearchView searchView = (SearchView) findViewById(R.id.search);
         EditText searchEditText = (EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text);
         ListView listView = (ListView) findViewById(R.id.listview);
-        ArrayList<String> contactList = new ArrayList<>();
+        final ArrayList<String> contactList = new ArrayList<>();
 
         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
         while (phones.moveToNext())
@@ -51,7 +51,13 @@ public class contacts extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                String list[] = contactList.toArray(new String[contactList.size()]);
+                ArrayList<String> search = new ArrayList<>();
+                for(String i: contactList){
+                    if(i.substring(0,newText.length()).equals(newText)){
+                        search.add(i);
+                    }
+                }
+                String[] list = search.toArray(new String[search.size()]);
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.lv_item, R.id.textView, list);
                 return false;
             }
