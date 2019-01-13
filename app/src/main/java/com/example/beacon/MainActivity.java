@@ -20,9 +20,33 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private Button distress;
+    private Button contacts;
+    private final int REQUEST_CODE = 1;
+    public MainActivity(){}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        contacts = findViewById(R.id.contactsButton);
+        contacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, scenarios.class);
+                startActivity(intent);
+            }
+        });
+        contacts = findViewById(R.id.contactsButton);
+        contacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, scenarios.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
 
