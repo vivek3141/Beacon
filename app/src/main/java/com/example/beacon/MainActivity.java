@@ -54,6 +54,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    public void sendMessages(String message, String number) {
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage("smsto:" + number, null, message, null, null);
+    }
+
+
+    public void makeCall(String number) {
+        Intent phoneIntent = new Intent(Intent.ACTION_CALL);
+        phoneIntent.setData(Uri.parse("tel:" + number));
+        try {
+            startActivity(phoneIntent);
+        }
+        catch(SecurityException s){}
+    }
+
 }
 
 

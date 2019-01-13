@@ -1,6 +1,9 @@
 package com.example.beacon;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.os.PowerManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,6 +33,7 @@ public class Call_scenarios extends AppCompatActivity {
                 Intent int1 = new Intent(Call_scenarios.this, Call.class);
                 int1.putExtra("type", "bully");
                 startActivity(int1);
+
             }
         });
         kidnapButton.setOnClickListener(new View.OnClickListener() {

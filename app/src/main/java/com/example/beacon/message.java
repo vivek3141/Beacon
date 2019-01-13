@@ -134,5 +134,6 @@ public class message extends Service {
 
         mServiceCamera.release();
         mServiceCamera = null;
+
     }
 }
