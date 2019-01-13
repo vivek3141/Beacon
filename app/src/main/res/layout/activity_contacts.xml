@@ -50,7 +50,7 @@
             android:layout_marginTop="9dp"
             android:layout_toEndOf="@+id/search"
             android:background="@drawable/gradient_button"
-            android:text="Next"
+            android:text="OK"
             android:textColor="@color/white" />
 
     </RelativeLayout>
