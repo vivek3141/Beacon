@@ -34,8 +34,8 @@ public class Call extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_call);
+        Log.i("", "In the CALLING CLASS");
         file_name = getIntent().getStringExtra("type") + ".txt";
         String file = "";
         try {

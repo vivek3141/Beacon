@@ -75,6 +75,8 @@ public class Contacts extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                Intent intent = new Intent(Contacts.this, MainActivity.class);
+                startActivity(intent);
             }
         });
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

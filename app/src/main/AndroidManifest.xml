@@ -36,6 +36,9 @@
         </activity>
         <activity android:name=".scenarios" />
         <activity android:name=".Contacts"></activity>
+        <activity android:name=".Call_scenarios"></activity>
+        <activity android:name=".Call"></activity>
+
 
         <service android:name=".MainActivity$service">
 
