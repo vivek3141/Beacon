@@ -1,15 +1,16 @@
 package com.example.beacon;
 
 
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -46,39 +47,25 @@ public class MainActivity extends AppCompatActivity {
                 StrictMode.setVmPolicy(builder.build());
 
 
-//                AsyncTask.execute(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        try {
-//                            Intent callIntent = new Intent(Intent.ACTION_CALL);
-//                            callIntent.setData(Uri.parse("tel:" + "1-650-695-2483"));
-//                            startActivity(callIntent);
-//                        } catch (SecurityException err) {
-//                            System.out.println(err);
-//                        }
-//                    }
-//
-//                });
-//
-//                AsyncTask.execute(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        SmsManager smsManager = SmsManager.getDefault();
-//                        smsManager.sendTextMessage("smsto:1-650-695-2483", null, "I'm in deep trouble. Call the police", null, null);
-//                    }
-//
-//                });
-//
-//
-//                AsyncTask.execute(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        record_video(arg);
-//                    }
-//                });
 
 
-                new LongOperation().execute("");
+
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage("smsto:1-650-695-2483", null, "I'm in deep trouble. Call the police", null, null);
+
+                try {
+                    Intent callIntent = new Intent(Intent.ACTION_CALL);
+                    callIntent.setData(Uri.parse("tel:" + "1-650-695-2483"));
+                    startActivity(callIntent);
+
+                } catch (SecurityException err) {
+                    Log.i("", err.toString());
+                }
+
+                record_video(arg);
+
+
+                //new LongOperation().execute("");
 
             }
         });
@@ -109,35 +96,37 @@ public class MainActivity extends AppCompatActivity {
         File video_file = new File(folder, "video.mp4");
         return video_file;
     }
-
-
-    private class LongOperation extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
-
-                callIntent.setData(Uri.parse("tel:" + "1-650-695-2483"));
-                startActivity(callIntent);
-            } catch (SecurityException err) {
-                System.out.println(err);
-            }
-
-            return null;
-        }
-
-
-        protected void onPostExecute(Void... values) {
-        }
-
-        @Override
-        protected void onPreExecute() {}
-
-        @Override
-        protected void onProgressUpdate(Void... values) {}
-    }
 }
+
+
+//    private class LongOperation extends AsyncTask<String, Void, String> {
+//
+//        @Override
+//        protected String doInBackground(String... params) {
+//            try {
+//                Intent callIntent = new Intent(Intent.ACTION_CALL);
+//
+//                callIntent.setData(Uri.parse("tel:" + "1-650-695-2483"));
+//                startActivity(callIntent);
+//            } catch (SecurityException err) {
+//                System.out.println(err);
+//            }
+//
+//            return null;
+//        }
+//
+//
+//        protected void onPostExecute(Void... values) {
+//        }
+//
+//        @Override
+//        protected void onPreExecute() {}
+//
+//        @Override
+//        protected void onProgressUpdate(Void... values) {}
+//    }
+//}
+
 
 
 
