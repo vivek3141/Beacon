@@ -38,11 +38,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        contacts = findViewById(R.id.contactsButton);
-        contacts.setOnClickListener(new View.OnClickListener() {
+        distress = findViewById(R.id.distressButton);
+        distress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, scenarios.class);
+                Intent intent = new Intent(MainActivity.this, Call_scenarios.class);
                 startActivity(intent);
             }
         });
