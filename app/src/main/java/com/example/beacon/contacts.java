@@ -73,12 +73,6 @@ public class contacts extends AppCompatActivity {
         String list[] = contactList.toArray(new String[contactList.size()]);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.lv_item, R.id.textView, list);
         listView.setAdapter(arrayAdapter);
-        Log.i("", Arrays.toString(list));
-        Intent intent = getIntent();
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            Log.i(query);
-        }
 
     }
 }
