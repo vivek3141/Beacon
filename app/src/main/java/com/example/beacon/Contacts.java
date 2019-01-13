@@ -1,5 +1,6 @@
 package com.example.beacon;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -17,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.util.Log;
 import android.content.ContentResolver;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,8 +29,10 @@ import android.content.Intent;
 
 public class Contacts extends AppCompatActivity {
 
-    public CustomAdapter arrayAdapter;
-    public ArrayList<Integer> flags = new ArrayList<>();
+    private CustomAdapter arrayAdapter;
+    private String file_name;
+    private String to_write;
+    private FileOutputStream outputStream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,8 @@ public class Contacts extends AppCompatActivity {
         SearchView searchView = (SearchView) findViewById(R.id.search);
         final ListView listView = (ListView) findViewById(R.id.listview);
         final ArrayList<Model> items = new ArrayList<>();
+        file_name = getIntent().getStringExtra("type") + ".txt";
+
         Button button = (Button) findViewById(R.id.button2);
 
         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
@@ -52,19 +58,22 @@ public class Contacts extends AppCompatActivity {
         });
         phones.close();
         setContacts(listView, items);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CheckBox cb;
-                View list_v;
-                for (int i = 0; i < listView.getAdapter().getCount(); i++) {
-                    list_v = listView.getChildAt(i);
-                    if (list_v != null) {
-                        cb = list_v.findViewById(R.id.icon);
-                        if (cb.isChecked()) {
-                            Log.i("", arrayAdapter.getItem(i).toString());
-                        }
+                to_write = "";
+                for (int i = 0; i < items.size(); i++) {
+                    if (items.get(i).getSelected()) {
+                        to_write = to_write + items.get(i).getAnimal().replace("\n", ":") + "\n";
                     }
+                }
+                try {
+                    outputStream = openFileOutput(file_name, Context.MODE_PRIVATE);
+                    outputStream.write(to_write.getBytes());
+                    outputStream.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
