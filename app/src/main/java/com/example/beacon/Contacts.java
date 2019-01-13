@@ -35,6 +35,7 @@ public class Contacts extends AppCompatActivity {
         SearchView searchView = (SearchView) findViewById(R.id.search);
         final ListView listView = (ListView) findViewById(R.id.listview);
         final ArrayList<String> contactList = new ArrayList<>();
+        final ArrayList<Model> items = new ArrayList<>();
         Button button = (Button) findViewById(R.id.button2);
 
         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
@@ -42,15 +43,12 @@ public class Contacts extends AppCompatActivity {
             String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
             String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
             contactList.add(name + "\n" + phoneNumber);
-
+            items.add(new Model(name + "\n" + phoneNumber));
         }
         phones.close();
-        for(int counter = 0; counter < contactList.size(); counter++){
-            flags.add(0);
-        }
         Collections.sort(contactList);
         final String list[] = contactList.toArray(new String[contactList.size()]);
-        setContacts(list, listView, flags);
+        setContacts(list, listView, items);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,7 +59,7 @@ public class Contacts extends AppCompatActivity {
                     if (list_v != null) {
                         cb = list_v.findViewById(R.id.icon);
                         if (cb.isChecked()) {
-                            Log.i("", arrayAdapter.getItem(i));
+                            Log.i("", arrayAdapter.getItem(i).toString());
                         }
                     }
                 }
@@ -82,16 +80,16 @@ public class Contacts extends AppCompatActivity {
                     }
                 }
                 String[] list = search.toArray(new String[search.size()]);
-                setContacts(list, listView, flags);
+                setContacts(list, listView, items);
                 return false;
             }
         });
 
     }
 
-    protected void setContacts(String[] list, ListView listView, ArrayList<Integer> flags) {
+    protected void setContacts(String[] list, ListView listView, ArrayList<Model> flags) {
 
-        arrayAdapter = new CustomAdapter(getApplicationContext(), list, flags);
+        arrayAdapter = new CustomAdapter(getApplicationContext(), flags);
         listView.setAdapter(arrayAdapter);
     }
 }
