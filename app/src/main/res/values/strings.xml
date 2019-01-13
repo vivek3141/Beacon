@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Beacon</string>
+    <string name="scenario">CHOOSE SCENARIO</string>
+    <string name="chooseCont">CHOOSE YOUR CONTACTS</string>
+</resources>
