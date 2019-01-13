@@ -18,7 +18,6 @@ import android.widget.Button;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.io.File;
 
 public class Call extends AppCompatActivity {
 
@@ -63,8 +62,7 @@ public class Call extends AppCompatActivity {
         for (int i = 0; i < read.length; i++) {
             smsManager.sendTextMessage("smsto:" + read[i].split(":")[1], null, "I'm in deep trouble. Call the police", null, null);
         }
-        Intent intent = new Intent(Call.this, MainActivity.class);
-        startActivity(intent);
+
 /*
         contacts = findViewById(R.id.contactsButton);
         contacts.setOnClickListener(new View.OnClickListener() {
