@@ -19,6 +19,7 @@ import android.content.ContentResolver;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import android.content.Intent;
@@ -28,13 +29,13 @@ public class Contacts extends AppCompatActivity {
 
     public CustomAdapter arrayAdapter;
     public ArrayList<Integer> flags = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
         SearchView searchView = (SearchView) findViewById(R.id.search);
         final ListView listView = (ListView) findViewById(R.id.listview);
-        final ArrayList<String> contactList = new ArrayList<>();
         final ArrayList<Model> items = new ArrayList<>();
         Button button = (Button) findViewById(R.id.button2);
 
@@ -42,13 +43,15 @@ public class Contacts extends AppCompatActivity {
         while (phones.moveToNext()) {
             String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
             String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            contactList.add(name + "\n" + phoneNumber);
             items.add(new Model(name + "\n" + phoneNumber));
         }
+        Collections.sort(items, new Comparator<Model>() {
+            public int compare(Model m1, Model m2) {
+                return m1.getAnimal().compareTo(m2.getAnimal());
+            }
+        });
         phones.close();
-        Collections.sort(contactList);
-        final String list[] = contactList.toArray(new String[contactList.size()]);
-        setContacts(list, listView, items);
+        setContacts(listView, items);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,21 +76,20 @@ public class Contacts extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                ArrayList<String> search = new ArrayList<>();
-                for (String i : contactList) {
-                    if (i.substring(0, newText.length()).toUpperCase().equals(newText.toUpperCase())) {
-                        search.add(i);
+                ArrayList<Model> search = new ArrayList<>();
+                for (Model i : items) {
+                    if (i.getAnimal().substring(0, newText.length()).toUpperCase().equals(newText.toUpperCase())) {
+                        search.add(new Model(i.getAnimal()));
                     }
                 }
-                String[] list = search.toArray(new String[search.size()]);
-                setContacts(list, listView, items);
+                setContacts(listView, search);
                 return false;
             }
         });
 
     }
 
-    protected void setContacts(String[] list, ListView listView, ArrayList<Model> flags) {
+    protected void setContacts(ListView listView, ArrayList<Model> flags) {
 
         arrayAdapter = new CustomAdapter(getApplicationContext(), flags);
         listView.setAdapter(arrayAdapter);

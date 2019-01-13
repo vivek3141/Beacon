@@ -29,4 +29,6 @@ public class Model {
     public Model(String name) {
         this.animal = name;
     }
+
+
 }
