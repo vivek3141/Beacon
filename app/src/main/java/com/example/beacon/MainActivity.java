@@ -2,6 +2,7 @@ package com.example.beacon;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -18,17 +19,22 @@ import android.widget.Button;
 
 import java.io.File;
 
+
 public class MainActivity extends AppCompatActivity {
 
 
     private Button distress;
     private Button contacts;
     private final int REQUEST_CODE = 1;
-    public MainActivity(){}
+
+    public MainActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         contacts = findViewById(R.id.contactsButton);
         contacts.setOnClickListener(new View.OnClickListener() {
