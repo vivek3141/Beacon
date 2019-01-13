@@ -40,7 +40,7 @@ public class Contacts extends AppCompatActivity {
         Button button = (Button) findViewById(R.id.button2);
 
         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
-        while (phones.moveToNext()) {
+        while (phones != null && phones.moveToNext()) {
             String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
             String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
             items.add(new Model(name + "\n" + phoneNumber));

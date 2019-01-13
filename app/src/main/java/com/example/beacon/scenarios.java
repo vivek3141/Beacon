@@ -28,6 +28,7 @@ public class scenarios extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent int1 = new Intent(scenarios.this, Contacts.class);
+                int1.putExtra("type", "bully");
                 startActivity(int1);
             }
         });
@@ -35,6 +36,7 @@ public class scenarios extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent int2 = new Intent(scenarios.this, Contacts.class);
+                int2.putExtra("type", "kidnap");
                 startActivity(int2);
 
             }
@@ -43,6 +45,7 @@ public class scenarios extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent int2 = new Intent(scenarios.this, Contacts.class);
+                int2.putExtra("type", "abuse");
                 startActivity(int2);
             }
         }));
@@ -50,6 +53,7 @@ public class scenarios extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent int3 = new Intent(scenarios.this, Contacts.class);
+                int3.putExtra("type", "shooting");
                 startActivity(int3);
             }
         });
