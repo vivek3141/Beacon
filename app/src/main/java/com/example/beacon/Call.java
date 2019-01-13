@@ -35,7 +35,6 @@ public class Call extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
-        Log.i("", "In the CALLING CLASS");
         file_name = getIntent().getStringExtra("type") + ".txt";
         String file = "";
         try {
@@ -50,7 +49,7 @@ public class Call extends AppCompatActivity {
             e.printStackTrace();
         }
         Log.i("", file);
-
+/*
         contacts = findViewById(R.id.contactsButton);
         contacts.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,10 +165,10 @@ public class Call extends AppCompatActivity {
                 }
 
             });
-
-        }
+*/
     }
 }
+
 
 
 

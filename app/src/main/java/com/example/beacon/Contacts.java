@@ -20,9 +20,11 @@ import android.content.ContentResolver;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.io.FileInputStream;
 
 import android.content.Intent;
 
@@ -33,6 +35,8 @@ public class Contacts extends AppCompatActivity {
     private String file_name;
     private String to_write;
     private FileOutputStream outputStream;
+    private String file;
+    private FileInputStream inputStream;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +46,31 @@ public class Contacts extends AppCompatActivity {
         final ListView listView = (ListView) findViewById(R.id.listview);
         final ArrayList<Model> items = new ArrayList<>();
         file_name = getIntent().getStringExtra("type") + ".txt";
+        file = "";
+        try {
+            inputStream = openFileInput(file_name);
+
+            int content;
+            while ((content = inputStream.read()) != -1) {
+                file = file + ((char) content);
+            }
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String[] read = file.split("\n");
 
         Button button = (Button) findViewById(R.id.button2);
-
+        Model add;
         Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
         while (phones != null && phones.moveToNext()) {
             String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
             String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            items.add(new Model(name + "\n" + phoneNumber));
+            add = new Model(name + "\n" + phoneNumber);
+            if(Arrays.asList(read).contains(name+":"+phoneNumber)){
+                add.setSelected(true);
+            }
+            items.add(add);
         }
         Collections.sort(items, new Comparator<Model>() {
             public int compare(Model m1, Model m2) {
