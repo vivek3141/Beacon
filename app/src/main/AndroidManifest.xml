@@ -5,8 +5,9 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-BBBBBBBBBB
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -18,8 +19,8 @@ BBBBBBBBBB
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -34,16 +35,14 @@ BBBBBBBBBB
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".scenarios" />
-        <activity android:name=".Contacts"></activity>
-        <activity android:name=".Call_scenarios"></activity>
-        <activity android:name=".Call"></activity>
+        <activity android:name=".Contacts" />
+        <activity android:name=".Call_scenarios" />
+        <activity android:name=".Call" />
+        <service android:name="com.example.beacon.message" />
 
-
-        <service android:name=".MainActivity$service">
-
-        </service>
     </application>
 
 </manifest>

@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         distress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Call_scenarios.class);
+                Intent intent = new Intent(MainActivity.this, Call.class);
                 startActivity(intent);
             }
         });
